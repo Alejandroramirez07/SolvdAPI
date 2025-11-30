@@ -1,18 +1,28 @@
-package com.solvd.model;
+package com.solvd.database.model;
 
-public class Client {
+public class User {
+
+    private Long id;
     private String username;
     private String email;
     private String password;
     private int projectCode;
 
-    public Client() {}
+    public User() {}
 
-    public Client(String username, String email, String password, int projectCode) {
+    public User(Long id, String username, String email, String password, int projectCode) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.projectCode = projectCode;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId() {
+        this.id=id;
     }
 
     public String getUsername() {

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.database.mappers.UserMapper">
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="id">
+        <![CDATA[
+			INSERT INTO carina.USERS (USERNAME, EMAIL, PASSWORD, PROJECT_CODE)
+			VALUES (
+				#{username},
+				#{password},
+				#{email},
+				#{project_code}
+			)
+		]]>
+    </insert>
+
+    <sql id="getUser">
+        <![CDATA[
+			SELECT
+				U.ID AS USER_ID,
+				U.USERNAME AS USER_USERNAME,
+				U.EMAIL AS USER_EMAIL,
+				U.PASSWORD AS USER_PASSWORD,
+				U.PROJECT_CODE AS USER_PROJECT_CODE
+			FROM
+				carina.USERS U
+			LEFT JOIN
+				carina.USER_PREFERENCES UP
+			ON
+				UP.USER_ID = U.ID
+		]]>
+    </sql>
+
+    <select id="findById" resultMap="UserResultMap">
+        <include refid="getUser" />
+        <![CDATA[
+			WHERE U.ID = #{id};
+		]]>
+    </select>
+
+    <select id="findByUserName" resultMap="UserResultMap">
+        <include refid="getUser" />
+        <![CDATA[
+			WHERE U.USERNAME = #{username};
+		]]>
+    </select>
+
+    <update id="update">
+        <![CDATA[
+			UPDATE
+			    carina.USERS
+		]]>
+        <set>
+            <if test="null != username">
+                <![CDATA[
+		               USERNAME = #{username},
+		            ]]>
+            </if>
+            <if test="null != email">
+                <![CDATA[
+		               EMAIL = #{email},
+		            ]]>
+            </if>
+            <if test="null != password">
+                <![CDATA[
+		               PASSWORD = #{password},
+		            ]]>
+            </if>
+            <if test="null != project_code">
+                <![CDATA[
+		               PASSWORD = #{project_code},
+		            ]]>
+            </if>
+        </set>
+        <![CDATA[
+			WHERE
+			    ID = #{id}
+		]]>
+    </update>
+
+    <delete id="delete">
+        <![CDATA[
+			DELETE FROM carina.USERS
+			WHERE ID = #{id}
+		]]>
+    </delete>
+
+    <resultMap type="com.solvd.database.model.User"
+               id="UserResultMap" autoMapping="false">
+        <id column="USER_ID" property="id" />
+        <result column="USER_USERNAME" property="username" />
+        <result column="USER_EMAIL" property="email" />
+        <result column="PROJECT_CODE" property="project_code" />
+        <result column="USER_PASSWORD" property="password" />
+    </resultMap>
+
+</mapper>

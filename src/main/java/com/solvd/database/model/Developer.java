@@ -1,4 +1,4 @@
-package com.solvd.model;
+package com.solvd.database.model;
 
 public class Developer {
 
