@@ -12,9 +12,7 @@ import com.zebrunner.carina.utils.config.Configuration;
 public class DeleteUserMethod extends AbstractApiMethodV2 {
 
     public DeleteUserMethod(int userId) {
-
         super(null, null);
-
         replaceUrlPlaceholder("base_url", Configuration.getRequired("api_url"));
         replaceUrlPlaceholder("user_id", String.valueOf(userId));
     }
