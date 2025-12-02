@@ -2,11 +2,15 @@ package com.solvd.tests;
 
 import com.solvd.api.methods.*;
 import com.zebrunner.carina.core.AbstractTest;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.testng.annotations.Test;
 
 public class DeclarativeApiTests extends AbstractTest {
 
+    private static final Logger LOGGER = (Logger) LogManager.getLogger(DeclarativeApiTests.class);
+    
     @Test
     public void testGetUsersValid() {
         GetUsersMethod api = new GetUsersMethod();
@@ -39,8 +43,8 @@ public class DeclarativeApiTests extends AbstractTest {
 
         api.callAPI();
 
-        System.out.println("API call completed successfully!");
-        System.out.println("Response: " + api.getResponse());
+        LOGGER.info("API call completed successfully!");
+        LOGGER.info("Response: " + api.getResponse());
     }
 
     @Test
@@ -48,7 +52,7 @@ public class DeclarativeApiTests extends AbstractTest {
         DeleteUserMethod api = new DeleteUserMethod(1);
         api.callAPI();
 
-        System.out.println(" DELETE request completed successfully!");
-        System.out.println("Status: " + api.getResponse());
+        LOGGER.info(" DELETE request completed successfully!");
+        LOGGER.info("Status: " + api.getResponse());
     }
 }
