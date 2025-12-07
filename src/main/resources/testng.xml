@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Wikipedia Android Tests" verbose="1">
+    <test name="Wikipedia Android Tests">
+        <classes>
+            <class name="com.solvd.api.WikipediaCarinaAndroidTests"/>
+        </classes>
+    </test>
+</suite>
