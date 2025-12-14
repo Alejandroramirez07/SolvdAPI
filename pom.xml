@@ -30,10 +30,34 @@
         <appium.version>8.6.0</appium.version>
         <testng.version>7.10.2</testng.version>
         <rest-assured.version>4.3.0</rest-assured.version>
+        <suite.file>src/test/resources/testng_suites/ui_api_tests.xml</suite.file>
     </properties>
 
+    <profiles>
+        <profile>
+            <id>api-only</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>src/test/resources/testng_suites/api-tests.xml</suite.file>
+            </properties>
+        </profile>
+        <profile>
+            <id>mobile-only</id>
+            <properties>
+                <suite.file>src/test/resources/testng_suites/mobile-tests.xml</suite.file>
+            </properties>
+        </profile>
+        <profile>
+            <id>default-suite</id>
+            <properties>
+                <suite.file>src/test/resources/testng_suites/ui_api_tests.xml</suite.file>
+            </properties>
+        </profile>
+    </profiles>
+
     <dependencies>
-        <!-- Selenium -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
@@ -49,15 +73,11 @@
             <artifactId>selenium-chrome-driver</artifactId>
             <version>${selenium.version}</version>
         </dependency>
-
-        <!-- Appium for Mobile Testing -->
         <dependency>
             <groupId>io.appium</groupId>
             <artifactId>java-client</artifactId>
             <version>${appium.version}</version>
         </dependency>
-
-        <!-- Carina Framework -->
         <dependency>
             <groupId>com.zebrunner</groupId>
             <artifactId>carina-core</artifactId>
@@ -110,24 +130,18 @@
             <artifactId>carina-appcenter</artifactId>
             <version>${carina-appcenter.version}</version>
         </dependency>
-
-        <!-- TestNG -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>${testng.version}</version>
             <scope>test</scope>
         </dependency>
-
-        <!-- REST API Testing -->
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
             <version>${rest-assured.version}</version>
             <scope>test</scope>
         </dependency>
-
-        <!-- Database -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -138,8 +152,6 @@
             <artifactId>mybatis</artifactId>
             <version>3.5.15</version>
         </dependency>
-
-        <!-- JSON Handling -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
@@ -160,8 +172,6 @@
             <artifactId>org.everit.json.schema</artifactId>
             <version>1.5.1</version>
         </dependency>
-
-        <!-- Logging -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
@@ -177,8 +187,6 @@
             <artifactId>slf4j-api</artifactId>
             <version>1.7.30</version>
         </dependency>
-
-        <!-- Utilities -->
         <dependency>
             <groupId>io.github.cdimascio</groupId>
             <artifactId>java-dotenv</artifactId>
@@ -189,8 +197,6 @@
             <artifactId>byte-buddy</artifactId>
             <version>1.14.5</version>
         </dependency>
-
-        <!-- XML Binding -->
         <dependency>
             <groupId>jakarta.xml.bind</groupId>
             <artifactId>jakarta.xml.bind-api</artifactId>
@@ -202,8 +208,6 @@
             <version>4.0.4</version>
             <scope>runtime</scope>
         </dependency>
-
-        <!-- Apache Commons -->
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
@@ -233,7 +237,7 @@
                 <version>3.2.5</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/testng_suites/ui_api_tests.xml</suiteXmlFile>
+                        <suiteXmlFile>${suite.file}</suiteXmlFile>
                     </suiteXmlFiles>
                     <testFailureIgnore>false</testFailureIgnore>
                     <systemPropertyVariables>

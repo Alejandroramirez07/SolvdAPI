@@ -2,7 +2,7 @@
 <suite name="Internet Herokuapp UI Tests" verbose="1">
     <test name="Selenium Interactions Test">
         <classes>
-            <class name="com.solvd.api.InternetUITests"/>
+            <class name="com.solvd.api.WikipediaCarinaAndroidTests"/>
         </classes>
     </test>
 </suite>

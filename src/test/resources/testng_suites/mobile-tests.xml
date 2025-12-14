@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Mobile Test Suite">
+    <parameter name="android.sdk.root" value="C:\Users\danie\AppData\Local\Android\Sdk"/>
+    <test name="Mobile Tests">
+        <classes>
+            <class name="com.solvd.api.WikipediaCarinaAndroidTests"/>
+            <class name="com.solvd.api.WikipediaAndroidTest"/>
+        </classes>
+    </test>
+</suite>

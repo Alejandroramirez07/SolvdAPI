@@ -1,0 +1,48 @@
+services:
+  selenium-hub:
+    image: selenium/hub:4.16.0
+    container_name: selenium-hub
+    ports:
+      - "4444:4444"
+      - "4442:4442"
+      - "4443:4443"
+
+  selenium-chrome:
+    image: selenium/node-chrome:4.16.0
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    volumes:
+      - /dev/shm:/dev/shm
+
+  selenium-firefox:
+    image: selenium/node-firefox:4.16.0
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+    volumes:
+      - /dev/shm:/dev/shm
+
+  appium:
+    image: appium/appium:latest
+    container_name: appium-server
+    privileged: true
+    ports:
+      - "4723:4723"
+    volumes:
+      - /dev/bus/usb:/dev/bus/usb
+      - ./apps:/apps
+    environment:
+      - APPIUM_PORT=4723
+      - APPIUM_HOST=0.0.0.0
+      - CONNECT_TO_GRID=true
+      - SELENIUM_HOST=selenium-hub
+      - SELENIUM_PORT=4444

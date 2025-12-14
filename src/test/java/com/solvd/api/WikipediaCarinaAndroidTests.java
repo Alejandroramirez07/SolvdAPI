@@ -65,7 +65,6 @@ public class WikipediaCarinaAndroidTests implements IAbstractTest, IMobileUtils 
 
     private void skipOnboarding() {
         try {
-
             WebElement skipButton = driver.findElement(AppiumBy.id("org.wikipedia:id/fragment_onboarding_skip_button"));
             skipButton.click();
             LOGGER.info("Skipped onboarding");
