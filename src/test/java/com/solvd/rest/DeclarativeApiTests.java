@@ -1,4 +1,4 @@
-package com.solvd.tests;
+package com.solvd.rest;
 
 import com.solvd.api.methods.*;
 import com.zebrunner.carina.core.AbstractTest;

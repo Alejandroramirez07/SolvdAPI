@@ -1,4 +1,4 @@
-package com.solvd.tests;
+package com.solvd.rest;
 
 import org.testng.annotations.Test;
 
